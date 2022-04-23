@@ -1,7 +1,8 @@
 const express = require("express");
+const cors = require("cors");
 
 const { globalErrorHandler } = require("./middleware/error.middleware");
-
+const { AppError } = require("./utils/appError");
 const { userRouter } = require("./routes/user.routes");
 const { projectsRouter } = require("./routes/projects.routes");
 const { tecnologiesRouter } = require("./routes/tecnologies.routes");
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/projects", projectsRouter);
