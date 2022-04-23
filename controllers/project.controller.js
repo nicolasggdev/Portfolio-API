@@ -50,6 +50,35 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
 
       const imgDownloadUrl = await getDownloadURL(imgRef);
 
+      const tecnologiesPromises = tecnologies.map(
+        async ({
+          id,
+          image: tecnologyImage,
+          name,
+          projectId,
+          status,
+          createdAt,
+          updatedAt
+        }) => {
+          const TecnoImgRef = ref(storage, tecnologyImage);
+
+          const tecnologyImageDownloadUrl = await getDownloadURL(TecnoImgRef);
+
+          return {
+            id,
+            image: tecnologyImageDownloadUrl,
+            name,
+            projectId,
+            status,
+            createdAt,
+            updatedAt
+          };
+        }
+      );
+      const resolvedTecnologies = await Promise.all(tecnologiesPromises);
+
+      console.log(resolvedTecnologies);
+
       return {
         id,
         deploy,
@@ -57,7 +86,7 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
         englishDescription,
         spanisDescription,
         image: imgDownloadUrl,
-        tecnologies,
+        tecnologies: resolvedTecnologies,
         status,
         createdAt,
         updatedAt
