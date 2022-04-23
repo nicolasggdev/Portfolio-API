@@ -7,13 +7,14 @@ exports.downloadCv = catchAsync(async (req, res, next) => {
   const data = await User.findAll({ where: { status: "active" } });
 
   const dataPromises = data.map(
-    async ({ id, document, status, createdAt, updatedAt }) => {
+    async ({ id, language, document, status, createdAt, updatedAt }) => {
       const imgRef = ref(storage, document);
 
       const documentDownloadUrl = await getDownloadURL(imgRef);
 
       return {
         id,
+        language,
         document: documentDownloadUrl,
         status,
         createdAt,
