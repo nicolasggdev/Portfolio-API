@@ -5,7 +5,7 @@ const { ref, uploadBytes, getDownloadURL } = require("firebase/storage");
 const { catchAsync } = require("../utils/catchAsync");
 
 exports.createProject = catchAsync(async (req, res, next) => {
-  const { deploy, title, description } = req.body;
+  const { deploy, title, englishDescription, spanisDescription } = req.body;
 
   const imgRef = ref(storage, `projects/${req.file.originalname}`);
 
@@ -14,7 +14,8 @@ exports.createProject = catchAsync(async (req, res, next) => {
   const newProject = await Project.create({
     deploy,
     title,
-    description,
+    englishDescription,
+    spanisDescription,
     image: result.metadata.fullPath
   });
 
@@ -37,7 +38,8 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
       id,
       deploy,
       title,
-      description,
+      englishDescription,
+      spanisDescription,
       image,
       tecnologies,
       status,
@@ -52,7 +54,8 @@ exports.getAllProjects = catchAsync(async (req, res, next) => {
         id,
         deploy,
         title,
-        description,
+        englishDescription,
+        spanisDescription,
         image: imgDownloadUrl,
         tecnologies,
         status,

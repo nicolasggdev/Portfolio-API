@@ -9,6 +9,10 @@ const User = database.define("user", {
     allowNull: false,
     type: DataTypes.INTEGER
   },
+  language: {
+    type: DataTypes.STRING(20),
+    allowNull: false
+  },
   document: {
     type: DataTypes.STRING(255),
     allowNull: false

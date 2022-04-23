@@ -21,7 +21,11 @@ const Project = database.define("project", {
     type: DataTypes.STRING(255),
     allowNull: false
   },
-  description: {
+  englishDescription: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  spanisDescription: {
     type: DataTypes.STRING(255),
     allowNull: false
   },

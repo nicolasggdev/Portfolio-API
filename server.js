@@ -16,7 +16,7 @@ database
 relationModel();
 
 database
-  .sync()
+  .sync({ force: true })
   .then(() => console.log("Database is synced"))
   .catch((err) => console.log(err));
 

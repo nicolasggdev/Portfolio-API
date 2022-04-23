@@ -33,11 +33,16 @@ exports.downloadCv = catchAsync(async (req, res, next) => {
 });
 
 exports.createCv = catchAsync(async (req, res, next) => {
+  const { language } = req.body;
+
   const imgRef = ref(storage, `CV/${req.file.originalname}`);
 
   const result = await uploadBytes(imgRef, req.file.buffer);
 
-  const documentCv = await User.create({ document: result.metadata.fullPath });
+  const documentCv = await User.create({
+    language,
+    document: result.metadata.fullPath
+  });
 
   res.status(201).json({
     status: "success",
