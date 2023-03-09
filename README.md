@@ -8,7 +8,7 @@ https://documenter.getpostman.com/view/18428706/UyrDDau8
 
 # Deploy
 
-https://portfolio-api-production-a234.up.railway.app/
+https://portfoliongg-api.fly.dev
 
 **Install**
 
